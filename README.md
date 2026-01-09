@@ -126,5 +126,3 @@ docker compose down
 - The probe enforces conservative limits (e.g., maximum message size) and validates all length fields.
 
 ---
-
-If you want, I can add a short `REPORT.md` template suitable for academic submission (without adding new functionality).
