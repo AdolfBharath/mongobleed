@@ -1,0 +1,22 @@
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: mongo-compression-leak-lab
+    command:
+      - mongod
+      - --port
+      - "27017"
+      - --bind_ip_all
+      - --networkMessageCompressors
+      - zlib
+      - --setParameter
+      - diagnosticDataCollectionEnabled=false
+    ports:
+      # Localhost-only exposure on the host machine
+      - "127.0.0.1:27017:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand({ ping: 1 }).ok" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
